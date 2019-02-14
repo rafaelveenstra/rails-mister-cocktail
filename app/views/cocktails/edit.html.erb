@@ -1,0 +1,11 @@
+<h1>Edit Cocktail's Name</h1>
+
+<ul>
+<%= form_for @cocktail do |f| %>
+  <li><%= f.label :name, 'Enter a name' %>
+  <%= f.text_field :name %></li>
+  <li><%= f.submit %></li>
+<% end %>
+</ul>
+
+<p><%= link_to "Back to home page", cocktails_path %></p>
