@@ -12,5 +12,33 @@
   <% end %>
 </div>
 
+<%= simple_form_for [@cocktail, @dose] do |f| %>
+
+<% if flash[:dose_errors] %>
+
+    <div class="errors-container">
+      <ul>
+        <% flash[:dose_errors].each do |message| %>
+        <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+    <% end %>
+
+  <div class="form-inputs">
+    <%= f.association :ingredient %>
+    <%= f.input :description %>
+  </div>
+
+<div class="form-actions">
+  <%= f.button :submit %>
+</div>
+
+<% end %>
+
+
 <p><%= link_to "Edit cocktail name", edit_cocktail_path %></p>
 <p><%= link_to "Back to home page", cocktails_path %></p>
+
+
+

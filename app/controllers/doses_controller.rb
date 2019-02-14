@@ -8,10 +8,10 @@ class DosesController < ApplicationController
     @dose = Dose.new(dose_params)
     @dose.cocktail = Cocktail.find(params[:cocktail_id])
     if @dose.save
-      redirect_to @dose.cocktail
     else
-      render :new
+      flash[:dose_errors] = @dose.errors.full_messages
     end
+    redirect_to @dose.cocktail
   end
 
   def destroy
@@ -23,6 +23,6 @@ class DosesController < ApplicationController
   private
 
   def dose_params
-    params.require(:dose).permit(:description, :ingredients_id)
+    params.require(:dose).permit(:description, :ingredient_id)
   end
 end
