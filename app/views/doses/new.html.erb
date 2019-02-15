@@ -1,0 +1,36 @@
+
+
+<div>
+  <% @cocktail.doses.each do |dose| %>
+
+    <p> Ingredient: <%= dose.ingredient.name %> </p>
+    <p> Description: <%= dose.description %></p>
+
+  <%= link_to "Delete dose", dose, method: :delete, data: { confirm: "Do you want to delete?" }  %>
+  <% end %>
+</div>
+
+
+<%= simple_form_for [@cocktail, @dose] do |f| %>
+
+<% if flash[:dose_errors] %>
+
+    <div class="errors-container">
+      <ul>
+        <% flash[:dose_errors].each do |message| %>
+        <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+    <% end %>
+
+  <div class="form-inputs">
+    <%= f.association :ingredient, colletion: Ingredient.order('name ASC') %>
+    <%= f.input :description %>
+  </div>
+
+<div class="form-actions">
+  <%= f.button :submit %>
+</div>
+
+<% end %>
